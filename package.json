@@ -15,6 +15,10 @@
     "audit"
   ],
   "author": "sleep-written",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sleep-written/obj-audit"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/chai": "^4.2.22",
