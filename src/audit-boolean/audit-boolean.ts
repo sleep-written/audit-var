@@ -9,6 +9,9 @@ export class AuditBoolean implements Auditable<boolean, BooleanOptions> {
     get options(): BooleanOptions {
         return { ...this._options };
     }
+    set options(v: BooleanOptions) {
+        this._options = v;
+    }
 
     constructor(options?: Partial<BooleanOptions>) {
         this._options = {

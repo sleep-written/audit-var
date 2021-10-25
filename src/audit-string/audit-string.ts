@@ -8,7 +8,10 @@ import { MaximumLengthError, MinimumLengthError } from './errors';
 export class AuditString implements Auditable<string, StringOptions> {
     private _options: StringOptions;
     get options(): StringOptions {
-        return { ...this._options };
+        return this._options;
+    }
+    set options(v: StringOptions) {
+        this._options = v;
     }
 
     constructor(options?: Partial<StringOptions>) {
