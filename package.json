@@ -1,5 +1,5 @@
 {
-  "name": "var-audit",
+  "name": "audit-var",
   "version": "0.0.1",
   "description": "Inspects variables according to a defined structucture",
   "main": "./dist/index.js",

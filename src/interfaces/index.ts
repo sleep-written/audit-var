@@ -1,0 +1,1 @@
+export { Auditable } from './auditable';
