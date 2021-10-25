@@ -3,16 +3,13 @@ import { Auditable, CommonOptions } from '../interfaces';
 export interface ObjectOptions<T extends Record<string, any>>
 extends CommonOptions<T> {
     /**
-     * If this option is `true`, the `audit` function will return
-     * the input value modified by the other options setted here.
-     * Otherwise, the `audit` function will return the original
-     * input value without changes.
-     * 
-     * ### Note:
-     * Setting this property at the top of the ancestors
-     * replaces all descendants `mutable` option.
+     * I this option is `true`, the Audit function will checks
+     * if the incoming object has exactly the same properties
+     * declared. If the incoming object has at least one property
+     * more than the expected properties, the audit function will
+     * throws an error.
      */
-    mutable: boolean;
+    strict?: boolean;
 
     /**
      * Properties to audit.

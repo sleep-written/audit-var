@@ -19,6 +19,7 @@ export class AuditString implements Auditable<string, StringOptions> {
             default: options?.default,
             mutable: options?.mutable ?? false,
             trim: options?.trim ?? false,
+            cut: options?.cut ?? false,
             min: options?.min,
             max: options?.max,
         }
@@ -59,7 +60,7 @@ export class AuditString implements Auditable<string, StringOptions> {
         // Check max length
         const max = this._options.max;
         if (typeof max === 'number' && copy.length > max) {
-            if (this._options.mutable) {
+            if (this._options.cut) {
                 copy = copy.substr(0, max);
             } else {
                 throw new MaximumLengthError(max, copy.length);

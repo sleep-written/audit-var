@@ -11,5 +11,5 @@ export interface CommonOptions<T> {
      * Otherwise, the `audit` function will return the original
      * input value without changes.
      */
-    mutable: boolean;
+    mutable?: boolean;
 }

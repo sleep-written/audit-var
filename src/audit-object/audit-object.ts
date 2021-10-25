@@ -16,6 +16,7 @@ implements Auditable<Record<string, any>, ObjectOptions<T>> {
         this._options = {
             default: options.default,
             mutable: options.mutable ?? false,
+            
             keys: { ...options.keys }
         };
     }
@@ -32,6 +33,11 @@ implements Auditable<Record<string, any>, ObjectOptions<T>> {
         const expKeys = Object.keys(this._options.keys);
         const actKeys = Object.keys(input);
 
+        // Strict mode
+        if (expKeys.length !== actKeys.length) {
+            throw new Error();
+        }
+
         // Prepare the new object
         const clone = { ...input };
         const copy: any = {};
@@ -45,10 +51,18 @@ implements Auditable<Record<string, any>, ObjectOptions<T>> {
 
             const target = clone[expKey];
             const targetAudit = this._options.keys[expKey];
+
+            // Emit mutable
+            if (this._options.mutable) {
+                targetAudit.options.mutable = true;
+                this._options.mutable = true;
+            }
             
             // Audit the key
-            targetAudit.options.mutable = this._options.mutable;
             copy[expKey] = targetAudit.audit(target);
+            if (targetAudit.options.mutable) {
+                this._options.mutable = true;
+            }
         }
 
         // Return the value

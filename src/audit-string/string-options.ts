@@ -8,6 +8,13 @@ export interface StringOptions extends CommonOptions<string> {
     trim: boolean;
 
     /**
+     * If this option is `true` and the incoming string are more
+     * long than the option `max`, the output string will be cutted
+     * to obtain the same length that the `max` length indicated.
+     */
+    cut: boolean;
+
+    /**
      * The minimum string length accepted by the audit process.
      */
     min?: number;
