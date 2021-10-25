@@ -1,6 +1,6 @@
 import { assert } from 'chai';
-import { EmptyBooleanValueError, NotBooleanTypeError } from '.';
 import { AuditBoolean } from './audit-boolean';
+import { EmptyValueError, InvalidTypeError } from '../errors';
 
 describe('Testing "./audit-boolean"', () => {
     describe('permissive = false', () => {
@@ -21,7 +21,7 @@ describe('Testing "./audit-boolean"', () => {
                 const boss = new AuditBoolean();
                 boss.audit(null);
             } catch (err) {
-                assert.instanceOf(err, EmptyBooleanValueError);
+                assert.instanceOf(err, EmptyValueError);
             }
         });
 
@@ -30,7 +30,7 @@ describe('Testing "./audit-boolean"', () => {
                 const boss = new AuditBoolean();
                 boss.audit(undefined);
             } catch (err) {
-                assert.instanceOf(err, EmptyBooleanValueError);
+                assert.instanceOf(err, EmptyValueError);
             }
         });
 
@@ -39,7 +39,7 @@ describe('Testing "./audit-boolean"', () => {
                 const boss = new AuditBoolean();
                 boss.audit(1);
             } catch (err) {
-                assert.instanceOf(err, NotBooleanTypeError);
+                assert.instanceOf(err, InvalidTypeError);
             }
         });
     });
@@ -74,7 +74,7 @@ describe('Testing "./audit-boolean"', () => {
                 const boss = new AuditBoolean(true);
                 boss.audit(1);
             } catch (err) {
-                assert.instanceOf(err, NotBooleanTypeError);
+                assert.instanceOf(err, InvalidTypeError);
             }
         });
     });
