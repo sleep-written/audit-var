@@ -1,7 +1,7 @@
-import { Auditable, CommonOptions } from '../interfaces';
+import { Auditable, DefaultValueOption } from '../interfaces';
 
 export interface ObjectOptions<T extends Record<string, any>>
-extends CommonOptions<T> {
+extends DefaultValueOption<T> {
     /**
      * I this option is `true`, the Audit function will checks
      * if the incoming object has exactly the same properties
@@ -14,5 +14,5 @@ extends CommonOptions<T> {
     /**
      * Properties to audit.
      */
-    keys: Record<keyof T, Auditable<any, CommonOptions<any>>>;
+    keys: Record<keyof T, Auditable<any, any>>;
 }

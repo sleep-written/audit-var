@@ -1,6 +1,6 @@
-import { CommonOptions } from '../interfaces';
+import { DefaultValueOption } from '../interfaces';
 
-export interface StringOptions extends CommonOptions<string> {
+export interface StringOptions extends DefaultValueOption<string> {
     /**
      * If this option is `true`, trims the input value before
      * evaluates the length of the incoming value.

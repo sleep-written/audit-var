@@ -1,3 +1,3 @@
-import { CommonOptions } from '../interfaces';
+import { DefaultValueOption } from '../interfaces';
 
-export type BooleanOptions = CommonOptions<boolean>;
+export type BooleanOptions = DefaultValueOption<boolean>;

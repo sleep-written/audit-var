@@ -8,7 +8,6 @@ describe('Testing "./audit-string"', () => {
     describe(
             'Options:\n'
         +   '    - default: null\n'
-        +   '    - mutable: false\n'
         +   '    - trim:    false\n'
         +   '    - cut:     false\n'
         +   '    - min:     null\n'
@@ -51,77 +50,26 @@ describe('Testing "./audit-string"', () => {
     describe(
             'Options:\n'
         +   '    - default: "-"\n'
-        +   '    - mutable: false\n'
         +   '    - trim:    false\n'
         +   '    - cut:     false\n'
         +   '    - min:     null\n'
         +   '    - max:     null'
     , () => {
         it('value -> null', () => {
-            const boss = new AuditString({
-                default: '-'
-            });
-
-            const resp = boss.audit(null);
-            assert.isNull(resp);
-        });
-
-        it('value -> undefined', () => {
-            const boss = new AuditString({
-                default: '-'
-            });
-
-            const resp = boss.audit(undefined);
-            assert.isUndefined(resp);
-        });
-
-        it('value -> 111', () => {
-            try {
-                const boss = new AuditString({
-                    default: '-'
-                });
-                boss.audit(111);
-            } catch (err) {
-                assert.instanceOf(err, InvalidTypeError);
-            }
-        });
-    });
-
-    describe(
-            'Options:\n'
-        +   '    - default: "-"\n'
-        +   '    - mutable: true\n'
-        +   '    - trim:    false\n'
-        +   '    - cut:     false\n'
-        +   '    - min:     null\n'
-        +   '    - max:     null'
-    , () => {
-        it('value -> null', () => {
-            const boss = new AuditString({
-                default: '-',
-                mutable: true
-            });
-
+            const boss = new AuditString({ default: '-' });
             const resp = boss.audit(null);
             assert.strictEqual(resp, '-');
         });
 
         it('value -> undefined', () => {
-            const boss = new AuditString({
-                default: '-',
-                mutable: true
-            });
-
+            const boss = new AuditString({ default: '-' });
             const resp = boss.audit(undefined);
             assert.strictEqual(resp, '-');
         });
 
         it('value -> 111', () => {
             try {
-                const boss = new AuditString({
-                    default: '-',
-                    mutable: true
-                });
+                const boss = new AuditString({ default: '-' });
                 boss.audit(111);
             } catch (err) {
                 assert.instanceOf(err, InvalidTypeError);
@@ -132,7 +80,6 @@ describe('Testing "./audit-string"', () => {
     describe(
             'Options:\n'
         +   '    - default: null\n'
-        +   '    - mutable: false\n'
         +   '    - trim:    false\n'
         +   '    - cut:     false\n'
         +   '    - min:     3\n'
@@ -166,7 +113,6 @@ describe('Testing "./audit-string"', () => {
     describe(
             'Options:\n'
         +   '    - default: null\n'
-        +   '    - mutable: false\n'
         +   '    - trim:    true\n'
         +   '    - cut:     false\n'
         +   '    - min:     3\n'
@@ -184,7 +130,7 @@ describe('Testing "./audit-string"', () => {
         it('value -> "     hello  "', () => {
             const boss = new AuditString({ trim: true, min: 3, max: 8 });
             const resp = boss.audit('     hello  ');
-            assert.strictEqual(resp, '     hello  ');
+            assert.strictEqual(resp, 'hello');
         });
 
         it('value -> "   nooo4747 37827            "', () => {
@@ -200,20 +146,19 @@ describe('Testing "./audit-string"', () => {
     describe(
             'Options:\n'
         +   '    - default: null\n'
-        +   '    - mutable: false\n'
         +   '    - trim:    true\n'
         +   '    - cut:     true\n'
         +   '    - min:     3\n'
         +   '    - max:     8'
     , () => {
         it('value -> "     hello  "', () => {
-            const boss = new AuditString({ mutable: true, trim: true, min: 3, max: 8, cut: true });
+            const boss = new AuditString({ trim: true, min: 3, max: 8, cut: true });
             const resp = boss.audit('     hello  ');
             assert.strictEqual(resp, 'hello');
         });
 
         it('value -> "     hello 2837648273 283728       "', () => {
-            const boss = new AuditString({ mutable: true, trim: true, min: 3, max: 8, cut: true });
+            const boss = new AuditString({ trim: true, min: 3, max: 8, cut: true });
             const resp = boss.audit('     hello 2837648273 283728       ');
             assert.strictEqual(resp, 'hello 28');
         });

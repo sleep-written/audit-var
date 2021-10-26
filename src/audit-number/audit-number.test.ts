@@ -8,7 +8,6 @@ describe('Testing "./audit-number"', () => {
     describe(
             'Options:\n'
         +   '    - default: null\n'
-        +   '    - mutable: false\n'
         +   '    - limiter: false\n'
         +   '    - min:     null\n'
         +   '    - max:     null'
@@ -50,7 +49,6 @@ describe('Testing "./audit-number"', () => {
     describe(
             'Options:\n'
         +   '    - default: null\n'
-        +   '    - mutable: false\n'
         +   '    - limiter: false\n'
         +   '    - min:     0\n'
         +   '    - max:     10'
@@ -83,15 +81,15 @@ describe('Testing "./audit-number"', () => {
     describe(
             'Options:\n'
         +   '    - default: null\n'
-        +   '    - mutable: true\n'
         +   '    - limiter: true\n'
         +   '    - min:     0\n'
         +   '    - max:     10'
     , () => {
         it('Value -> 5', () => {
             const boss = new AuditNumber({
-                mutable: true, limiter: true,
-                min: 0, max: 10
+                limiter: true,
+                min: 0,
+                max: 10
             });
 
             const resp = boss.audit(5);
@@ -100,8 +98,9 @@ describe('Testing "./audit-number"', () => {
 
         it('Value -> -1', () => {
             const boss = new AuditNumber({
-                mutable: true, limiter: true,
-                min: 0, max: 10
+                limiter: true,
+                min: 0,
+                max: 10
             });
 
             const resp = boss.audit(-1);
@@ -110,8 +109,9 @@ describe('Testing "./audit-number"', () => {
 
         it('Value -> 11', () => {
             const boss = new AuditNumber({
-                mutable: true, limiter: true,
-                min: 0, max: 10
+                limiter: true,
+                min: 0,
+                max: 10
             });
 
             const resp = boss.audit(11);

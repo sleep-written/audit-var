@@ -1,6 +1,10 @@
-import { CommonOptions } from './common-options';
-
-export interface Auditable<Type, Options extends CommonOptions<Type>> {
+/**
+ * An interface that describes a common auditable instance object.
+ * @template Type The expected type of the variable to audit.
+ * @template Options The type of the object that describes how the
+ * audit object works.
+ */
+export interface Auditable<Type, Options> {
     get options(): Options;
     set options(v: Options);
 

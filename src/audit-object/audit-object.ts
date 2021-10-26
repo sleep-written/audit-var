@@ -15,8 +15,7 @@ implements Auditable<Record<string, any>, ObjectOptions<T>> {
     constructor(options: ObjectOptions<T>) {
         this._options = {
             default: options.default,
-            mutable: options.mutable ?? false,
-            
+            strict: options.strict,
             keys: { ...options.keys }
         };
     }
@@ -40,7 +39,7 @@ implements Auditable<Record<string, any>, ObjectOptions<T>> {
 
         // Prepare the new object
         const clone = { ...input };
-        const copy: any = {};
+        const output: any = {};
 
         for (const expKey of expKeys) {
             // Search the key
@@ -51,25 +50,10 @@ implements Auditable<Record<string, any>, ObjectOptions<T>> {
 
             const target = clone[expKey];
             const targetAudit = this._options.keys[expKey];
-
-            // Emit mutable
-            if (this._options.mutable) {
-                targetAudit.options.mutable = true;
-                this._options.mutable = true;
-            }
-            
-            // Audit the key
-            copy[expKey] = targetAudit.audit(target);
-            if (targetAudit.options.mutable) {
-                this._options.mutable = true;
-            }
+            output[expKey] = targetAudit.audit(target);
         }
 
         // Return the value
-        if (this._options.mutable) {
-            return copy;
-        } else {
-            return input;
-        }
+        return output;
     }
 }

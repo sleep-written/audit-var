@@ -15,8 +15,7 @@ export class AuditBoolean implements Auditable<boolean, BooleanOptions> {
 
     constructor(options?: Partial<BooleanOptions>) {
         this._options = {
-            default: options?.default,
-            mutable: options?.mutable ?? false
+            default: options?.default
         };
     }
 
@@ -25,11 +24,8 @@ export class AuditBoolean implements Auditable<boolean, BooleanOptions> {
         if (type !== 'boolean') {
             const defaultType = typeOf(this._options.default);
             if (defaultType === 'boolean' && input == null) {
-                if (this._options.mutable) {
-                    return this._options.default as boolean;
-                } else {
-                    return input;
-                }
+                // Return the default value
+                return this._options.default as boolean;
             } else if (input == null) {
                 // Return an empty error
                 throw new EmptyValueError('boolean');

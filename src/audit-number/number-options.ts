@@ -1,10 +1,10 @@
-import { CommonOptions } from '../interfaces';
+import { DefaultValueOption } from '../interfaces';
 
-export interface NumberOptions extends CommonOptions<number> {
+export interface NumberOptions extends DefaultValueOption<number> {
     /**
      * If this option is `true` and the incoming value it's out of
      * range (established with the properties `min` and `max`), the
-     * incoming number will be adjusted to this limits.
+     * incoming number will be adjusted inside to this limits.
      */
     limiter: boolean;
 

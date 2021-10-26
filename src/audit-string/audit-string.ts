@@ -1,8 +1,8 @@
 import { typeOf } from '../tool/type-of';
-
 import { Auditable } from '../interfaces';
-import { StringOptions } from './string-options';
 import { EmptyValueError, InvalidTypeError } from '../errors';
+
+import { StringOptions } from './string-options';
 import { MaximumLengthError, MinimumLengthError } from './errors';
 
 export class AuditString implements Auditable<string, StringOptions> {
@@ -17,7 +17,6 @@ export class AuditString implements Auditable<string, StringOptions> {
     constructor(options?: Partial<StringOptions>) {
         this._options = {
             default: options?.default,
-            mutable: options?.mutable ?? false,
             trim: options?.trim ?? false,
             cut: options?.cut ?? false,
             min: options?.min,
@@ -28,12 +27,8 @@ export class AuditString implements Auditable<string, StringOptions> {
     audit(input: any): string {
         // When the input is null/undefined
         if (input == null) {
-            if (this._options.default != null) {
-                if (this._options.mutable) {
-                    return this._options.default;
-                } else {
-                    return input;
-                }
+            if (typeof this._options.default === 'string') {
+                return this._options.default;
             } else {
                 throw new EmptyValueError('string');
             }
@@ -46,32 +41,28 @@ export class AuditString implements Auditable<string, StringOptions> {
         }
 
         // Trim a copy of the input
-        let copy = input as string;
+        let output = input as string;
         if (this._options.trim) {
-            copy = copy.trim();
+            output = output.trim();
         }
 
         // Check min length
         const min = this._options.min;
-        if (typeof min === 'number' && copy.length < min) {
-            throw new MinimumLengthError(min, copy.length);
+        if (typeof min === 'number' && output.length < min) {
+            throw new MinimumLengthError(min, output.length);
         }
 
         // Check max length
         const max = this._options.max;
-        if (typeof max === 'number' && copy.length > max) {
+        if (typeof max === 'number' && output.length > max) {
             if (this._options.cut) {
-                copy = copy.substr(0, max);
+                output = output.substr(0, max);
             } else {
-                throw new MaximumLengthError(max, copy.length);
+                throw new MaximumLengthError(max, output.length);
             }
         }
 
         // Return the value
-        if (this._options.mutable) {
-            return copy;
-        } else {
-            return input;
-        }
+        return output;
     }
 }

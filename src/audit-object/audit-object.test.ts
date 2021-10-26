@@ -14,7 +14,6 @@ describe('Testing "./audit-object"', () => {
 
         it('Test 01', () => {
             const boss = new AuditObject<Body>({
-                mutable: false,
                 keys: {
                     disabled: new AuditBoolean(),
                     value: new AuditString(),
@@ -33,7 +32,6 @@ describe('Testing "./audit-object"', () => {
         
         it('Test 02', () => {
             const boss = new AuditObject<Body>({
-                mutable: false,
                 keys: {
                     disabled: new AuditBoolean(),
                     value: new AuditString({ trim: true, min: 3, max: 8 }),
@@ -46,13 +44,12 @@ describe('Testing "./audit-object"', () => {
             });
     
             assert.hasAllKeys(resp, [ 'value', 'disabled' ]);
-            assert.strictEqual(resp.value, '        jajaja          ');
+            assert.strictEqual(resp.value, 'jajaja');
             assert.isFalse(resp.disabled);
         }).timeout;
         
         it('Test 03', () => {
             const boss = new AuditObject<Body>({
-                mutable: true,
                 keys: {
                     disabled: new AuditBoolean(),
                     value: new AuditString({ trim: true }),
@@ -123,7 +120,6 @@ describe('Testing "./audit-object"', () => {
                         keys: {
                             id: new AuditNumber({ min: 1 }),
                             cod: new AuditString({
-                                mutable: true,
                                 cut: true,
                                 min: 3,
                                 max: 3
