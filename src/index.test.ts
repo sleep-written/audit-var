@@ -1,7 +1,7 @@
 import { assert } from 'chai';
-import { AuditArray, AuditObject, AuditNumber, AuditString, KeyNotFoundError } from '.';
+import { AuditArray, AuditObject, AuditNumber, AuditString } from '.';
 
-describe.only('Testing examples "./README.md"', () => {
+describe('Testing examples "./README.md"', () => {
     describe('Example 01', () => {
         interface Body {
             id: number;
