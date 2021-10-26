@@ -8,7 +8,7 @@ import { AuditObject } from '../audit-object';
 import { AuditNumber, MaximumValueError } from '../audit-number';
 import { AuditString, MaximumStringLengthError } from '../audit-string';
 
-describe.only('Testing "./audit-array"', () => {
+describe('Testing "./audit-array"', () => {
     describe('Array Type A', () => {
         it('Case 01', () => {
             const boss = new AuditArray({

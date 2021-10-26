@@ -1,6 +1,7 @@
 import { Auditable } from '../interfaces';
 import { ObjectOptions } from './object-options';
 import { EmptyValueError } from '../errors';
+import { KeyNotFoundError, NotSameKeysError } from './errors';
 
 export class AuditObject<T extends Record<string, any>>
 implements Auditable<Record<string, any>, ObjectOptions<T>> {
@@ -33,8 +34,11 @@ implements Auditable<Record<string, any>, ObjectOptions<T>> {
         const actKeys = Object.keys(input);
 
         // Strict mode
-        if (expKeys.length !== actKeys.length) {
-            throw new Error();
+        if (
+            (this._options.strict) &&
+            (expKeys.length !== actKeys.length)
+        ) {
+            throw new NotSameKeysError(expKeys, actKeys);
         }
 
         // Prepare the new object
@@ -45,7 +49,7 @@ implements Auditable<Record<string, any>, ObjectOptions<T>> {
             // Search the key
             const found = actKeys.some(x => x === expKey);
             if (!found) {
-                throw new Error();
+                throw new KeyNotFoundError(expKey);
             }
 
             const target = clone[expKey];
