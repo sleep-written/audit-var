@@ -2,7 +2,7 @@ import { assert } from 'chai';
 
 import { AuditString } from './audit-string';
 import { EmptyValueError, InvalidTypeError } from '../errors';
-import { MaximumLengthError, MinimumLengthError } from './errors';
+import { MaximumStringLengthError, MinimumStringLengthError } from './errors';
 
 describe('Testing "./audit-string"', () => {
     describe(
@@ -90,7 +90,7 @@ describe('Testing "./audit-string"', () => {
                 const boss = new AuditString({ min: 3, max: 8 });
                 boss.audit('h');
             } catch (err) {
-                assert.instanceOf(err, MinimumLengthError);
+                assert.instanceOf(err, MinimumStringLengthError);
             }
         });
 
@@ -105,7 +105,7 @@ describe('Testing "./audit-string"', () => {
                 const boss = new AuditString({ min: 3, max: 8 });
                 boss.audit('nooo4747 37827');
             } catch (err) {
-                assert.instanceOf(err, MaximumLengthError);
+                assert.instanceOf(err, MaximumStringLengthError);
             }
         });
     });
@@ -123,7 +123,7 @@ describe('Testing "./audit-string"', () => {
                 const boss = new AuditString({ trim: true, min: 3, max: 8 });
                 boss.audit('        h          ');
             } catch (err) {
-                assert.instanceOf(err, MinimumLengthError);
+                assert.instanceOf(err, MinimumStringLengthError);
             }
         });
 
@@ -138,7 +138,7 @@ describe('Testing "./audit-string"', () => {
                 const boss = new AuditString({ trim: true, min: 3, max: 8 });
                 boss.audit('   nooo4747 37827            ');
             } catch (err) {
-                assert.instanceOf(err, MaximumLengthError);
+                assert.instanceOf(err, MaximumStringLengthError);
             }
         });
     });

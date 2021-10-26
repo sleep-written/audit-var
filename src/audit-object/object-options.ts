@@ -1,7 +1,7 @@
-import { Auditable, DefaultValueOption } from '../interfaces';
+import { Auditable, DefaultOption } from '../interfaces';
 
 export interface ObjectOptions<T extends Record<string, any>>
-extends DefaultValueOption<T> {
+extends DefaultOption<T> {
     /**
      * I this option is `true`, the Audit function will checks
      * if the incoming object has exactly the same properties

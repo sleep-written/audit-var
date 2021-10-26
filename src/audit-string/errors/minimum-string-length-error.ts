@@ -1,4 +1,4 @@
-export class MinimumLengthError extends Error {
+export class MinimumStringLengthError extends Error {
     constructor(expected: number, actual: number) {
         super(
                 `The minimum string length expected is ${expected} characters, `

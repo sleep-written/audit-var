@@ -1,2 +1,2 @@
-export { MinimumLengthError } from './minimum-length-error';
-export { MaximumLengthError } from './maximum-length-error';
+export { MinimumStringLengthError } from './minimum-string-length-error';
+export { MaximumStringLengthError } from './maximum-string-length-error';

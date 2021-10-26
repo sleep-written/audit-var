@@ -1,6 +1,7 @@
-import { DefaultValueOption } from '../interfaces';
+import { DefaultOption } from '../interfaces';
 
-export interface NumberOptions extends DefaultValueOption<number> {
+export interface NumberOptions
+extends DefaultOption<number> {
     /**
      * If this option is `true` and the incoming value it's out of
      * range (established with the properties `min` and `max`), the

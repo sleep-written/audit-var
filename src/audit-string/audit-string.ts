@@ -3,7 +3,7 @@ import { Auditable } from '../interfaces';
 import { EmptyValueError, InvalidTypeError } from '../errors';
 
 import { StringOptions } from './string-options';
-import { MaximumLengthError, MinimumLengthError } from './errors';
+import { MaximumStringLengthError, MinimumStringLengthError } from './errors';
 
 export class AuditString implements Auditable<string, StringOptions> {
     private _options: StringOptions;
@@ -49,7 +49,7 @@ export class AuditString implements Auditable<string, StringOptions> {
         // Check min length
         const min = this._options.min;
         if (typeof min === 'number' && output.length < min) {
-            throw new MinimumLengthError(min, output.length);
+            throw new MinimumStringLengthError(min, output.length);
         }
 
         // Check max length
@@ -58,7 +58,7 @@ export class AuditString implements Auditable<string, StringOptions> {
             if (this._options.cut) {
                 output = output.substr(0, max);
             } else {
-                throw new MaximumLengthError(max, output.length);
+                throw new MaximumStringLengthError(max, output.length);
             }
         }
 

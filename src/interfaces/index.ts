@@ -1,2 +1,2 @@
 export { Auditable } from './auditable';
-export { DefaultValueOption } from './default-value-option';
+export { DefaultOption } from './default-option';
