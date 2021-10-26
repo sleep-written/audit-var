@@ -1,12 +1,12 @@
 import { assert } from 'chai';
 
 import { InvalidTypeError } from '../errors';
+import { MaximumArrayLengthError } from './errors';
 
 import { AuditArray } from './audit-array';
 import { AuditObject } from '../audit-object';
 import { AuditNumber, MaximumValueError } from '../audit-number';
 import { AuditString, MaximumStringLengthError } from '../audit-string';
-import { MaximumArrayLengthError } from './errors';
 
 describe.only('Testing "./audit-array"', () => {
     describe('Array Type A', () => {

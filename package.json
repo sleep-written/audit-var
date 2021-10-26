@@ -1,12 +1,15 @@
 {
   "name": "audit-var",
-  "version": "0.0.1",
-  "description": "Inspects variables according to a defined structucture",
+  "version": "0.1.0",
+  "description": "Inspects variables according to a defined structure",
   "main": "./dist/index.js",
   "scripts": {
     "test": "cls && mocha --require ts-node/register ./src/**/*.test.ts",
     "prepare": "tsc"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "object",
     "inspect",
@@ -17,7 +20,7 @@
   "author": "sleep-written",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sleep-written/obj-audit"
+    "url": "https://github.com/sleep-written/audit-var"
   },
   "license": "MIT",
   "devDependencies": {
