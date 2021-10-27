@@ -225,4 +225,20 @@ const auditor = new AuditArray({
         name:   new AuditString()
     })
 });
+
+// This passes the audit
+const resp01 = auditor.audit({
+    id: 111,
+    name: 'Hades: Izanami',
+});
+
+// This passes the audit too
+const resp01 = auditor.audit({
+    name: 'Hakumen',
+});
+
+// This will fail
+const resp01 = auditor.audit({
+    id: 444,
+});
 ```
