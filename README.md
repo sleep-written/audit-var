@@ -190,7 +190,7 @@ interface Reference {
     name: string;
 }
 
-// ...and thsi is its auditory:
+// ...and this is its auditory:
 const auditor = new AuditArray({
     // Every member of the array will be audited by this:
     items: new AuditObject<Reference>({
@@ -205,3 +205,24 @@ const auditor = new AuditArray({
 - **max** _(optional)_ [`number`] - The maximum length accepted by the audit object.
 
 - **cut** _(optional)_ [`boolean`] - If this option is `true` and the incoming string are more long than the option `max`, the output string will be cutted to obtain the same length that the `max` length indicated.
+
+### `AuditNull`
+
+This class allows to receive `null` or `undefined` values. Its constructor receives an Audit class, and a optional character for strict mode:
+
+```ts
+// Our incoming object will be an array of this:
+interface Reference {
+    id: number;
+    name: string;
+}
+
+// ...and this is its auditory:
+const auditor = new AuditArray({
+    // Every member of the array will be audited by this:
+    items: new AuditObject<Reference>({
+        id:     new AuditNull(new AuditNumber()),
+        name:   new AuditString()
+    })
+});
+```

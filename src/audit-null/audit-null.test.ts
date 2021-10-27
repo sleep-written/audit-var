@@ -1,11 +1,11 @@
 import { assert } from 'chai';
 
-import { AuditNull } from './audit-null';
 import { InvalidTypeError } from '../errors';
-import { AuditObject, KeyNotFoundError } from '../audit-object';
 
+import { AuditNull } from './audit-null';
 import { AuditArray } from '../audit-array';
 import { AuditNumber } from '../audit-number';
+import { AuditObject, KeyNotFoundError } from '../audit-object';
 import { AuditString } from '../audit-string';
 import { AuditBoolean } from '../audit-boolean';
 
@@ -95,4 +95,35 @@ describe('Testing "./audit-null"', () => {
             assert.instanceOf(err, InvalidTypeError);
         }
     });
+
+    it('Check inside of AuditObject', () => {
+        const auditor = new AuditObject({
+            keys: {
+                id: new AuditNull(new AuditNumber({ min: 0 })),
+                descript: new AuditString()
+            }
+        });
+
+        const resp1 = auditor.audit({
+            id: 555,
+            descript: 'jajaja'
+        });
+        assert.hasAllKeys(resp1, [ 'id', 'descript' ]);
+        assert.strictEqual(resp1.id, 555);
+        assert.strictEqual(resp1.descript, 'jajaja');
+
+        const resp2 = auditor.audit({
+            descript: 'lol'
+        });
+        assert.hasAllKeys(resp2, [ 'descript' ]);
+        assert.strictEqual(resp2.descript, 'lol');
+
+        try {
+            auditor.audit({
+                id: 555
+            });
+        } catch (err) {
+            assert.instanceOf(err, KeyNotFoundError);
+        }
+    })
 });

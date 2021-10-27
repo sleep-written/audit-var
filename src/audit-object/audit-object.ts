@@ -2,6 +2,7 @@ import { Auditable } from '../interfaces';
 import { ObjectOptions } from './object-options';
 import { EmptyValueError } from '../errors';
 import { KeyNotFoundError, NotSameKeysError } from './errors';
+import { AuditNull } from '..';
 
 export class AuditObject<T extends Record<string, any>>
 implements Auditable<T, ObjectOptions<T>> {
@@ -47,14 +48,18 @@ implements Auditable<T, ObjectOptions<T>> {
 
         for (const expKey of expKeys) {
             // Search the key
+            const auditor = this._options.keys[expKey];
             const found = actKeys.some(x => x === expKey);
             if (!found) {
-                throw new KeyNotFoundError(expKey);
+                if (!(auditor instanceof AuditNull)) {
+                    throw new KeyNotFoundError(expKey);
+                } else {
+                    continue;
+                }
             }
 
             const target = clone[expKey];
-            const targetAudit = this._options.keys[expKey];
-            output[expKey] = targetAudit.audit(target);
+            output[expKey] = auditor.audit(target);
         }
 
         // Return the value
