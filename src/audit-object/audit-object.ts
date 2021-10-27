@@ -4,7 +4,7 @@ import { EmptyValueError } from '../errors';
 import { KeyNotFoundError, NotSameKeysError } from './errors';
 
 export class AuditObject<T extends Record<string, any>>
-implements Auditable<Record<string, any>, ObjectOptions<T>> {
+implements Auditable<T, ObjectOptions<T>> {
     private _options: ObjectOptions<T>;
     get options(): ObjectOptions<T> {
         return this._options;
