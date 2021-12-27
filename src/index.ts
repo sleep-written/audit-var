@@ -1,6 +1,7 @@
 export * from './errors';
 export * from './interfaces';
 
+export * from './audit-date';
 export * from './audit-null';
 export * from './audit-array';
 export * from './audit-number';

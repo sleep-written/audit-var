@@ -1,8 +1,8 @@
 import { Auditable } from '../interfaces';
+import { AuditNull } from '../audit-null';
 import { ObjectOptions } from './object-options';
 import { EmptyValueError } from '../errors';
 import { KeyNotFoundError, NotSameKeysError } from './errors';
-import { AuditNull } from '..';
 
 export class AuditObject<T extends Record<string, any>>
 implements Auditable<T, ObjectOptions<T>> {

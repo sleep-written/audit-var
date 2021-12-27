@@ -1,5 +1,5 @@
 import { DefaultOption } from '../interfaces';
-import { ObjectKeys } from './object-keys';
+import { ObjectOptionsKeys } from './object-options-keys';
 
 export interface ObjectOptions<T extends Record<string, any>>
 extends DefaultOption<T> {
@@ -15,5 +15,5 @@ extends DefaultOption<T> {
     /**
      * Properties to audit.
      */
-    keys: ObjectKeys<T>;
+    keys: ObjectOptionsKeys<T>;
 }

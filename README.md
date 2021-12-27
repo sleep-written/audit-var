@@ -2,6 +2,9 @@
 
 This package analize the structure of objects or primitives according to a template provided. It was created as a standard mechanism to validate the body of an http request (using [Express.js](https://www.npmjs.com/package/express)).
 
+## Changelog
+- Added a type to resolve the values of the keys in the configuration of `AuditObject`.
+- Added a class to audit Date objects (with support for JSON string).
 
 ## Installation
 
@@ -205,6 +208,15 @@ const auditor = new AuditArray({
 - **max** _(optional)_ [`number`] - The maximum length accepted by the audit object.
 
 - **cut** _(optional)_ [`boolean`] - If this option is `true` and the incoming string are more long than the option `max`, the output string will be cutted to obtain the same length that the `max` length indicated.
+
+### `AuditDate`
+
+This class audits `Date` objects, with the hability to parse JSON strings:
+```ts
+const auditor = new AuditDate();
+```
+
+- **fromJSON** _(optional)_ [`boolean`] - If this option is `true` and the incoming value is an string, that value will be parsed into a Date object. If the result of that operation generates an invalid date, an `InvalidStringDateError` instance will be thrown.
 
 ### `AuditNull`
 
