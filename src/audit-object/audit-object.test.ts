@@ -4,6 +4,7 @@ import { AuditObject } from './audit-object';
 import { AuditString } from '../audit-string';
 import { AuditBoolean } from '../audit-boolean';
 import { AuditNumber } from '../audit-number/audit-number';
+import { AuditNull } from '..';
 
 describe('Testing "./audit-object"', () => {
     describe('Interface A', () => {
@@ -144,5 +145,40 @@ describe('Testing "./audit-object"', () => {
             assert.hasAllKeys(resp.type, [ 'id', 'cod' ]);
             assert.strictEqual(resp.type.cod, 'POW');
         }).timeout(Number.MAX_SAFE_INTEGER);
+    });
+
+    describe('Without Interfaces', () => {
+        it('Case 01', () => {
+            const audit = new AuditObject({
+                keys: {
+                    key: new AuditString(),
+                    value: new AuditNumber()
+                }
+            });
+
+            const resp = audit.audit({
+                key: 'JajajJAjjaj',
+                value: 12345
+            });
+
+            assert.typeOf(resp.key, 'string');
+            assert.typeOf(resp.value, 'number');
+        });
+        
+        it('Case 02', () => {
+            const audit = new AuditObject({
+                keys: {
+                    key: new AuditString(),
+                    value: new AuditNull(new AuditNumber())
+                }
+            });
+
+            const resp = audit.audit({
+                key: 'JajajJAjjaj'
+            });
+
+            assert.typeOf(resp.key, 'string');
+            assert.isUndefined(resp.value);
+        });
     });
 });

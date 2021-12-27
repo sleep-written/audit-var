@@ -10,4 +10,4 @@ import { Auditable } from './auditable';
  * type auditType = boolean;
  * ```
  */
-export type AuditableType<A extends Auditable<any, any>> = A extends Auditable<infer T, any> ? T: unknown;
+export type AuditableType<A extends Auditable<any, any>> = A extends Auditable<infer T, any> ? T: never;
