@@ -1,35 +1,41 @@
 {
-  "name": "audit-var",
-  "version": "1.2.0",
-  "description": "Inspects variables according to a defined structure",
-  "main": "./dist/index.js",
-  "scripts": {
-    "test": "mocha --require ts-node/register ./src/**/*.test.ts",
-    "prepare": "tsc"
-  },
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "object",
-    "inspect",
-    "inspector",
-    "body",
-    "audit"
-  ],
-  "author": "sleep-written",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sleep-written/audit-var"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "@types/chai": "^4.2.22",
-    "@types/mocha": "^9.0.0",
-    "@types/node": "^16.11.6",
-    "chai": "^4.3.4",
-    "mocha": "^9.1.3",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
-  }
+    "name": "esm-template",
+    "version": "2.0.0",
+    "description": "Inspects variables according to a defined structure",
+    "main": "./dist/cjs/index.mjs",
+    "module": "./dist/mjs/index.mjs",
+    "exports": {
+        ".": {
+            "import": "./dist/mjs/index.mjs",
+            "require": "./dist/cjs/index.mjs"
+        }
+    },
+    "scripts": {
+        "test": "ava",
+        "start": "esmo ./src/index.mts",
+        "build": "rm -rf ./dist && ./fixup.sh && npm run build:mjs && npm run build:cjs",
+        "build:mjs": "tsc -p ./tsconfig.mjs.json",
+        "build:cjs": "tsc -p ./tsconfig.cjs.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sleep-written/audit-var"
+    },
+    "keywords": [
+        "template",
+        "esm",
+        "ts"
+    ],
+    "author": "sleep-written",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/sleep-written/audit-var/issues"
+    },
+    "homepage": "https://github.com/sleep-written/audit-var#readme",
+    "devDependencies": {
+        "@types/node": "^17.0.27",
+        "ava": "^4.2.0",
+        "esno": "^0.14.1",
+        "typescript": "^4.6.3"
+    }
 }
