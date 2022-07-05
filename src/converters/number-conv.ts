@@ -1,4 +1,4 @@
-import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
+import { InvalidTypeError, NotOptionalError, WrongLengthError } from '../errors/index.js';
 import { converterFunct, NumberType } from '../interfaces/index.js';
 
 export const numberConv: converterFunct<NumberType> = (d, t, p) => {
@@ -20,12 +20,12 @@ export const numberConv: converterFunct<NumberType> = (d, t, p) => {
             (typeof d.min === 'number') &&
             (t < d.min)
         ) {
-            throw new Error(`The target value is less than ${d.min}.`);
+            throw new WrongLengthError(p, `The target value is less than ${d.min}.`);
         } else if (
             (typeof d.max === 'number') &&
             (t > d.max)
         ) {
-            throw new Error(`The target value is more than ${d.max}.`);
+            throw new WrongLengthError(p, `The target value is more than ${d.max}.`);
         }
 
         // Valid number

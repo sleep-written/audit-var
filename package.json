@@ -1,14 +1,14 @@
 {
-    "name": "esm-template",
+    "name": "audit-var",
     "version": "2.0.0",
     "type": "module",
     "description": "Inspects variables according to a defined structure",
-    "main": "./dist/cjs/index.mjs",
-    "module": "./dist/mjs/index.mjs",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
     "exports": {
         ".": {
-            "import": "./dist/mjs/index.mjs",
-            "require": "./dist/cjs/index.mjs"
+            "require": "./dist/cjs/index.js",
+            "import": "./dist/esm/index.js"
         }
     },
     "scripts": {

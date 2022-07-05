@@ -1,4 +1,4 @@
-import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
+import { InvalidTypeError, NotOptionalError, WrongLengthError } from '../errors/index.js';
 import { StringType, converterFunct } from '../interfaces/index.js';
 
 export const stringConv: converterFunct<StringType> = (d, t, p) => {
@@ -23,12 +23,12 @@ export const stringConv: converterFunct<StringType> = (d, t, p) => {
             (typeof d.min === 'number') &&
             (v.length < d.min)
         ) {
-            throw new Error(`The length the target is less than ${d.min}.`);
+            throw new WrongLengthError(p, `The length of the string is lower than ${d.min}.`);
         } else if (
             (typeof d.max === 'number') &&
             (v.length > d.max)
         ) {
-            throw new Error(`The length the target is more than ${d.max}.`);
+            throw new WrongLengthError(p, `The length of the string is higher than ${d.max}.`);
         }
 
         // Valid string

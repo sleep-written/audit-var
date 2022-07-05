@@ -5,6 +5,8 @@ import { BooleanType } from './boolean-type.js';
 import { ObjectType } from './object-type.js';
 
 export interface ArrayType extends BaseType<'array'> {
+    min?: number;
+    max?: number;
     items:
         ArrayType   |
         NumberType  |
