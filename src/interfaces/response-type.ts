@@ -1,11 +1,11 @@
-import { Types } from './types';
+import { Types } from './types.js';
 
-import { NumberType } from './number-type';
-import { BooleanType } from './boolean-type';
+import { NumberType } from './number-type.js';
+import { BooleanType } from './boolean-type.js';
 
-import { ArrayType } from './array-type';
-import { StringType } from './string-type';
-import { ObjectType } from './object-type';
+import { ArrayType } from './array-type.js';
+import { StringType } from './string-type.js';
+import { ObjectType } from './object-type.js';
 
 export type ResponseType<T extends Types> =
         T extends StringType

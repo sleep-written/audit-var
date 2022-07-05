@@ -1,4 +1,4 @@
-import { Path } from '../interfaces';
+import { Path } from '../interfaces/index.js';
 
 export abstract class AuditorError extends Error {
     protected _path: Path;
@@ -7,7 +7,17 @@ export abstract class AuditorError extends Error {
     }
 
     constructor(path: Path, message: string) {
-        super(message + `\npath: ${path}`);
+        const strPath = path
+            .map(x => typeof x === 'string'
+                ?   `["${x}"]`
+                :   `[${x}]`
+            )
+            .reduce((prev, curr, i) => i > 0
+                ?   `${prev}${curr}`
+                :   curr
+            );
+
+        super(message + ` Path: ${strPath}`);
         this._path = path;
     }
 }

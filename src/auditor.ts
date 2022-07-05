@@ -1,5 +1,5 @@
-import { Types, ResponseType } from './interfaces';
-import { recursiveConv } from './converters';
+import { Types, ResponseType } from './interfaces/index.js';
+import { recursiveConv } from './converters/index.js';
 
 export class Auditor<T extends Types> {
     private _def: T;

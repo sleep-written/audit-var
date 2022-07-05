@@ -1,6 +1,7 @@
 {
     "name": "esm-template",
     "version": "2.0.0",
+    "type": "module",
     "description": "Inspects variables according to a defined structure",
     "main": "./dist/cjs/index.mjs",
     "module": "./dist/mjs/index.mjs",
@@ -12,10 +13,10 @@
     },
     "scripts": {
         "test": "ava",
-        "start": "esmo ./src/index.mts",
-        "build": "rm -rf ./dist && ./fixup.sh && npm run build:mjs && npm run build:cjs",
-        "build:mjs": "tsc -p ./tsconfig.mjs.json",
-        "build:cjs": "tsc -p ./tsconfig.cjs.json"
+        "start": "npx ts-node/esm ./src/index.ts",
+        "build": "./package.sh build",
+        "watch": "./package.sh watch",
+        "clean": "./package.sh clean"
     },
     "repository": {
         "type": "git",
@@ -23,7 +24,10 @@
     },
     "keywords": [
         "template",
-        "esm",
+        "auditor",
+        "audit",
+        "commonjs",
+        "module",
         "ts"
     ],
     "author": "sleep-written",
@@ -33,9 +37,9 @@
     },
     "homepage": "https://github.com/sleep-written/audit-var#readme",
     "devDependencies": {
-        "@types/node": "^17.0.27",
-        "ava": "^4.2.0",
-        "esno": "^0.14.1",
-        "typescript": "^4.6.3"
+        "@types/node": "^18.0.1",
+        "ava": "^4.3.0",
+        "ts-node": "^10.8.2",
+        "typescript": "^4.7.4"
     }
 }

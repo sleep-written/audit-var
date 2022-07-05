@@ -1,7 +1,7 @@
 import test from 'ava';
 
-import { Auditor } from '../auditor';
-import { InvalidTypeError, NotOptionalError } from '../errors';
+import { Auditor } from '../auditor.js';
+import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
 
 test('optional = false -> false; value = [55, 66, 77]', t => {
     const aud = new Auditor({

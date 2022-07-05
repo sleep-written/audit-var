@@ -1,1 +1,1 @@
-export { recursiveConv } from './recursive-conv';
+export { recursiveConv } from './recursive-conv.js';

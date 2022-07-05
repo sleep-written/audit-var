@@ -1,5 +1,5 @@
-import { Path, Types } from '../interfaces';
-import { AuditorError } from './auditor-error';
+import { Path, Types } from '../interfaces/index.js';
+import { AuditorError } from './auditor-error.js';
 
 export class InvalidTypeError extends AuditorError {
     constructor(type: Types['type'], path: Path) {

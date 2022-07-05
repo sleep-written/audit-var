@@ -1,13 +1,13 @@
-import { InvalidTypeError, NotOptionalError } from '../errors';
-import { ArrayType, converterFunct } from '../interfaces';
-import { recursiveConv } from './recursive-conv';
+import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
+import { ArrayType, converterFunct } from '../interfaces/index.js';
+import { recursiveConv } from './recursive-conv.js';
 
 export const arrayConv: converterFunct<ArrayType> = (d, t, p) => {
     if (t == null) {
         if (!d.optional) {
             throw new NotOptionalError(p);
         } else {
-            throw undefined;
+            return undefined;
         }
     } else if (!(t instanceof Array)) {
         throw new InvalidTypeError(d.type, p);

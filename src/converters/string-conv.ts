@@ -1,5 +1,5 @@
-import { InvalidTypeError, NotOptionalError } from '../errors';
-import { StringType, converterFunct } from '../interfaces';
+import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
+import { StringType, converterFunct } from '../interfaces/index.js';
 
 export const stringConv: converterFunct<StringType> = (d, t, p) => {
     if (t == null) {

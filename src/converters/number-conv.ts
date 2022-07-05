@@ -1,5 +1,5 @@
-import { InvalidTypeError, NotOptionalError } from '../errors';
-import { converterFunct, NumberType } from '../interfaces';
+import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
+import { converterFunct, NumberType } from '../interfaces/index.js';
 
 export const numberConv: converterFunct<NumberType> = (d, t, p) => {
     if (t == null) {

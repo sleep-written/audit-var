@@ -1,11 +1,11 @@
-export { Path } from './path';
-export { Types } from './types';
-export { ResponseType } from './response-type';
-export { converterFunct } from './converter-funct';
+export { Path } from './path.js';
+export { Types } from './types.js';
+export { ResponseType } from './response-type.js';
+export { converterFunct } from './converter-funct.js';
 
-export { ArrayType } from './array-type';
-export { ObjectType } from './object-type';
+export { ArrayType } from './array-type.js';
+export { ObjectType } from './object-type.js';
 
-export { NumberType } from './number-type';
-export { StringType } from './string-type';
-export { BooleanType } from './boolean-type';
+export { NumberType } from './number-type.js';
+export { StringType } from './string-type.js';
+export { BooleanType } from './boolean-type.js';
