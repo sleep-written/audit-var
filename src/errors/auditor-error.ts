@@ -7,17 +7,19 @@ export abstract class AuditorError extends Error {
     }
 
     constructor(path: Path, message: string) {
-        const strPath = path
-            .map(x => typeof x === 'string'
-                ?   `["${x}"]`
-                :   `[${x}]`
-            )
-            .reduce((prev, curr, i) => i > 0
-                ?   `${prev}${curr}`
-                :   curr
-            );
+        const strPath = path.length > 0
+            ?   path
+                    .map(x => typeof x === 'string'
+                        ?   `["${x}"]`
+                        :   `[${x}]`
+                    )
+                    .reduce(
+                        (prev, curr) => `${prev}${curr}`,
+                        ' Path: '
+                    )
+            :   '';
 
-        super(message + ` Path: ${strPath}`);
+        super(message + strPath);
         this._path = path;
     }
 }

@@ -4,9 +4,13 @@ import { numberConv } from './number-conv.js';
 import { objectConv } from './object-conv.js';
 import { stringConv } from './string-conv.js';
 import { arrayConv } from './array-conv.js';
+import { dateConv } from './date-conv.js';
 
 export const recursiveConv: converterFunct<Types> = (d, t, p) => {
     switch (d.type) {
+        case 'date':
+            return dateConv(d, t, p);
+
         case 'string':
             return stringConv(d, t, p);
 

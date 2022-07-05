@@ -3,12 +3,18 @@ import { Types } from './types.js';
 import { NumberType } from './number-type.js';
 import { BooleanType } from './boolean-type.js';
 
+import { DateType } from './date-type.js';
 import { ArrayType } from './array-type.js';
 import { StringType } from './string-type.js';
 import { ObjectType } from './object-type.js';
 
 export type ResponseType<T extends Types> =
-        T extends StringType
+        T extends DateType
+    ?   T['optional'] extends true
+    ?   Date | undefined
+    :   Date
+
+    :   T extends StringType
     ?   T['optional'] extends true
     ?   string | undefined
     :   string
