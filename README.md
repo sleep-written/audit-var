@@ -4,6 +4,8 @@ Validates the type and structure of an incoming object. It's specially useful to
 
 This module works in __ESM__ projects (using _import_) and __CJS__ (using _require_) projects too.
 
+## Contents
+
 <!-- vscode-markdown-toc -->
 * [The problem](#Theproblem)
 * [The solution](#Thesolution)
@@ -13,6 +15,7 @@ This module works in __ESM__ projects (using _import_) and __CJS__ (using _requi
 	* [Type `'number'`](#Typenumber)
 	* [Type `'date'`](#Typedate)
 	* [Type `'array'`](#Typearray)
+	* [Type `'object'`](#Typeobject)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -267,7 +270,7 @@ export const auditor = new Auditor({
 });
 ```
 
-### Type `'object'`
+### <a name='Typeobject'></a>Type `'object'`
 
 Options:
 - `keys` _(required)_: `Record<string, BaseType<T>>`;
