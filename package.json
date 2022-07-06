@@ -16,7 +16,8 @@
         "start": "npx ts-node/esm ./src/index.ts",
         "build": "./package.sh build",
         "watch": "./package.sh watch",
-        "clean": "./package.sh clean"
+        "clean": "./package.sh clean",
+        "prepare": "npm run build"
     },
     "repository": {
         "type": "git",
