@@ -4,6 +4,7 @@ export * from './errors/index.js'
 export {
     Types,
 
+    BaseType,
     ArrayType,
     ObjectType,
 

@@ -12,8 +12,3 @@ export class Auditor<T extends Types> {
         return recursiveConv(this._def, target, []);
     }
 }
-
-
-const jaja = new Auditor({
-    type: 'string'
-})

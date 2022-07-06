@@ -111,7 +111,7 @@ The class `Auditor` makes all the job, you just must to import that class, and p
 
 As much as the __Array__ and __Object__ types, both have support to nested arrays and objects. So with this approach you can declare complex structures as you need.
 
-So, to declare the data expected, the `Auditor` class receives an object as parameter, like this:
+So, to declare the data expected, the `Auditor` class receives an object as parameter (implements `BaseType<T>` interface), like this:
 
 ```ts
 import { Auditor } from 'audit-var';
@@ -129,7 +129,7 @@ export const auditor = new Auditor({
 });
 ```
 
-First you need to set this parameters:
+First you need to set this parameters (defined in `BaseType<T>` interface):
 
 - `type` _(required)_: __(read below)__;
     > Sets the type of data do you want to expect. __You can set any value described in [this list](#a-namehowtouseahow-to-use).__ When you sets this value, your code editor will shows the options available of the according type selected. If the incoming value doesn't match the type specified, the `Auditor` instance will throws an `InvalidTypeError` instance.
@@ -137,7 +137,7 @@ First you need to set this parameters:
 - `optional` _(optional)_: `boolean`;
     > By default this value is `false`. When this option is `false`, and the incoming value is `null` or `undefined`, the `Auditor` instance will throws an `NotOptionalError` instance. Otherwise, the method `auditor.audit(...);` will returns an undefined value either if the incoming value is `null` or `undefined`. 
 
-The particular option of every type are the following:
+These options are defined in `BaseType<T>` interface, so you must provide in the constructor an object that implements that interface. So, the object you can provide must be one of the following (these implements `BaseType<T>`):
 
 ### <a name='Typeboolean'></a>Type `'boolean'`
 
@@ -211,7 +211,7 @@ export const auditor = new Auditor({
 ### <a name='Typearray'></a>Type `'array'`
 
 Options:
-- `items` _(required)_: __(read below)__;
+- `items` _(required)_: `BaseType<T>`;
     > With this option you can specify the structure of every item stored in the array, using the same options described in the past types described. __You can declare nested arrays, or object arrays too.__
 - `min` _(optional)_: `number`;
     > If the incoming array has a length lower than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
@@ -262,6 +262,77 @@ export const auditor = new Auditor({
         keys: {
             id:     { type: number, min: 1 },
             name:   { type: string, min: 4 }
+        }
+    }
+});
+```
+
+### Type `'object'`
+
+Options:
+- `keys` _(required)_: `Record<string, BaseType<T>>`;
+    > Defines the type of data expected for every key of the incoming object.
+
+Example 01:
+```ts
+import { Auditor } from 'audit-var';
+
+// The expected incoming object
+interface Expected {
+    id: number;
+    name: string;
+    active?: boolean;
+}
+
+// How to declare the Auditor instance
+export const auditor = new Auditor({
+    type: 'object',
+    keys: {
+        id:     { type: 'number', min: 1 },
+        name:   { type: 'string', min: 4 },
+        active: { type: 'boolean'. optional: true}
+    }
+});
+```
+
+Example 02 (nested objects):
+```ts
+import { Auditor } from 'audit-var';
+
+// The expected incoming object
+interface Incoming {
+    id: number;
+    config: {
+        path: string;
+        silent?: boolean;
+    }
+    data: {
+        id: number;
+        value: string;
+    }
+}
+
+// How to declare the Auditor instance
+export const auditor = new Auditor({
+    type: 'object',
+    keys: {
+        id:     { type: 'number', min: 1 },
+        config:   {
+            type: 'object',
+            keys: {
+                path:   { type: 'string' },
+                silent: { type: 'boolean', optional: true }
+            }
+        },
+        data: {
+            type: 'array',
+            items: {
+                type: 'object',
+                keys: {
+                    id:     { type: 'number' },
+                    value:  { type: 'string' }
+                }
+            }
         }
     }
 });
