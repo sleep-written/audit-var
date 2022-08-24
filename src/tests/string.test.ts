@@ -9,6 +9,24 @@ test('optional = false; value = "jajaja"', t => {
     t.is(val, 'jajaja');
 });
 
+test('optional = false; value = "jajajajajajaj" (max: 3)', t => {
+    const aud = new Auditor({ type: 'string', max: 3 });
+    t.throws(
+        () => {
+            aud.audit('jajajajajajaj');
+        },
+        {
+            message: 'The length of the string is higher than 3.'
+        }
+    );
+});
+
+test('optional = false; value = "jajajajajajaj" (max: 3, cut: true)', t => {
+    const aud = new Auditor({ type: 'string', max: 3, cut: true });
+    const val = aud.audit('jajajajajajaj');
+    t.is(val, 'jaj');
+});
+
 test('optional = false; value = undefined', t => {
     const aud = new Auditor({ type: 'string' });
     t.throws(

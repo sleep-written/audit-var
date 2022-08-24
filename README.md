@@ -25,7 +25,7 @@ This module works in __ESM__ projects (using _import_) and __CJS__ (using _requi
 
 ## <a name='Theproblem'></a>The problem
 
-Usually, when you make an endpoint (with express for example) you need to validate the incomind data before to modify your server state. In thoses cases, just the validation part taket a lot of space in your file, for example:
+Usually, when you make an endpoint (with express for example) you need to validate the incoming data before to modify your server state. In those cases, just the validation part taken a lot of space in your file, for example:
 
 ```ts
 import express, { json } from 'express';
@@ -158,9 +158,11 @@ export const auditor = new Auditor({
 
 Options:
 - `min` _(optional)_: `number`;
-    > If the incoming string has a length lower than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
+    > If the incoming string has a length __lower__ than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
 - `max` _(optional)_: `number`;
-    > If the incoming string has a length higher than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
+    > If the incoming string has a length __higher__ than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
+- `cut` _(optional)_: `boolean`;
+    > If this option is enabled, when the length of the incoming string is longer than the `max` value settled, the output value will be cutted instead to throws an error.
 - `trim` _(optional)_: `boolean`;
     > Trims the incoming string __before to make any length validation__.
 
@@ -180,9 +182,9 @@ export const auditor = new Auditor({
 
 Options:
 - `min` _(optional)_: `number`;
-    > If the incoming value has lower than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
+    > If the incoming value has __lower__ than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
 - `max` _(optional)_: `number`;
-    > If the incoming value has higher than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
+    > If the incoming value has __higher__ than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
 
 Example:
 ```ts
@@ -217,9 +219,9 @@ Options:
 - `items` _(required)_: `BaseType<T>`;
     > With this option you can specify the structure of every item stored in the array, using the same options described in the past types described. __You can declare nested arrays, or object arrays too.__
 - `min` _(optional)_: `number`;
-    > If the incoming array has a length lower than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
+    > If the incoming array has a length __lower__ than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
 - `max` _(optional)_: `number`;
-    > If the incoming array has a length higher than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
+    > If the incoming array has a length __higher__ than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
 
 Example 01 (array of `string`):
 ```ts
@@ -339,4 +341,27 @@ export const auditor = new Auditor({
         }
     }
 });
+```
+
+## Utilities
+### `this.structure`
+Gets the actual structure of the current instance. Whith this you attach them to another more complex instance.
+
+```ts
+const auditorChild = new Auditor({
+    type: 'object',
+    keys: {
+        id:     { type: 'number', min: 1 },
+        text:   { type: 'string' }
+    }
+});
+
+const auditorParent = new Auditor({
+    type: 'object',
+    keys: {
+        objA: auditor.child.structure,
+        objB: auditor.child.structure,
+    }
+});
+
 ```

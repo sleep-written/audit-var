@@ -28,7 +28,11 @@ export const stringConv: converterFunct<StringType> = (d, t, p) => {
             (typeof d.max === 'number') &&
             (v.length > d.max)
         ) {
-            throw new WrongLengthError(p, `The length of the string is higher than ${d.max}.`);
+            if (!d.cut) {
+                throw new WrongLengthError(p, `The length of the string is higher than ${d.max}.`);
+            } else {
+                return v.slice(0, d.max);
+            }
         }
 
         // Valid string

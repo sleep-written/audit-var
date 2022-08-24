@@ -7,6 +7,9 @@ import { StringType } from './string-type.js';
 import { BooleanType } from './boolean-type.js';
 
 export interface ObjectType extends BaseType<'object'> {
+    /**
+     * Defines the type of data expected for every key of the incoming object.
+     */
     keys: Record<
         string,
         ArrayType   |
