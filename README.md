@@ -4,9 +4,10 @@ Validates the type and structure of an incoming object. It's specially useful to
 
 This module works in __ESM__ projects (using _import_) and __CJS__ (using _require_) projects too.
 
-## Contents
+## <a name='Contents'></a>Contents
 
 <!-- vscode-markdown-toc -->
+* [Contents](#Contents)
 * [The problem](#Theproblem)
 * [The solution](#Thesolution)
 * [How to use](#Howtouse)
@@ -16,6 +17,9 @@ This module works in __ESM__ projects (using _import_) and __CJS__ (using _requi
 	* [Type `'date'`](#Typedate)
 	* [Type `'array'`](#Typearray)
 	* [Type `'object'`](#Typeobject)
+	* [Type `record`](#Typerecord)
+* [Utilities](#Utilities)
+	* [`this.structure`](#this.structure)
 
 <!-- vscode-markdown-toc-config
 	numbering=false
@@ -111,8 +115,9 @@ The class `Auditor` makes all the job, you just must to import that class, and p
 - `'boolean'`.
 - `'array'`.
 - `'object'`.
+- `'record'`.
 
-As much as the __Array__ and __Object__ types, both have support to nested arrays and objects. So with this approach you can declare complex structures as you need.
+As much as the __Array__, __Object__ and __Record__ types, both have support to nested arrays and objects. So with this approach you can declare complex structures as you need.
 
 So, to declare the data expected, the `Auditor` class receives an object as parameter (implements `BaseType<T>` interface), like this:
 
@@ -343,7 +348,7 @@ export const auditor = new Auditor({
 });
 ```
 
-### Type `record`
+### <a name='Typerecord'></a>Type `record`
 Options:
 - `items` _(required)_: `BaseType<T>`;
     > With this option you can specify the structure of every item stored for each key inside of the, using the same options described in the past types described. __You can declare nested arrays, object arrays, or nested dictionaries too.__
@@ -371,8 +376,8 @@ Options:
     ```
 
 
-## Utilities
-### `this.structure`
+## <a name='Utilities'></a>Utilities
+### <a name='this.structure'></a>`this.structure`
 Gets the actual structure of the current instance. Whith this you attach them to another more complex instance.
 
 ```ts

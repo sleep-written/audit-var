@@ -3,6 +3,7 @@ export * from './errors/index.js'
 
 export {
     Types,
+    ResponseType,
 
     BaseType,
     ArrayType,
