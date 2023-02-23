@@ -217,7 +217,7 @@ export const auditor = new Auditor({
 
 Options:
 - `items` _(required)_: `BaseType<T>`;
-    > With this option you can specify the structure of every item stored in the array, using the same options described in the past types described. __You can declare nested arrays, or object arrays too.__
+    > With this option you can specify the structure of every item stored in the array, using the same options described in the past types described. __You can declare nested arrays, object arrays, or nested dictionaries too.__
 - `min` _(optional)_: `number`;
     > If the incoming array has a length __lower__ than the value setted, the `Auditor` instance will throws an `WrongLengthError` instance.
 - `max` _(optional)_: `number`;
@@ -342,6 +342,34 @@ export const auditor = new Auditor({
     }
 });
 ```
+
+### Type `record`
+Options:
+- `items` _(required)_: `BaseType<T>`;
+    > With this option you can specify the structure of every item stored for each key inside of the, using the same options described in the past types described. __You can declare nested arrays, object arrays, or nested dictionaries too.__
+
+    ```ts
+    import { Auditor } from 'audit-var';
+    
+    // The incoming data
+    const target = {
+        joder: { id: 666, nick: 'ghostlug' },
+        shavo: { id: 666, nick: 'dir en grey' },
+    };
+
+    // The auditor 
+    const auditor = new Auditor({
+        type: 'record',
+        items: {
+            type: 'object',
+            keys: {
+                id: { type: 'number' },
+                nick: { type: 'string' }
+            }
+        }
+    });
+    ```
+
 
 ## Utilities
 ### `this.structure`

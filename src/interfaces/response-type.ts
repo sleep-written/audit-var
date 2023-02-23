@@ -7,6 +7,7 @@ import { DateType } from './date-type.js';
 import { ArrayType } from './array-type.js';
 import { StringType } from './string-type.js';
 import { ObjectType } from './object-type.js';
+import { RecordType } from './record-type.js';
 
 export type ResponseType<T extends Types> =
         T extends DateType
@@ -33,6 +34,11 @@ export type ResponseType<T extends Types> =
     ?   T['optional'] extends true
     ?   ResponseType<T['items']>[] | undefined
     :   ResponseType<T['items']>[]
+
+    :   T extends RecordType
+    ?   T['optional'] extends true
+    ?   Record<string, ResponseType<T['items']>> | undefined
+    :   Record<string, ResponseType<T['items']>>
 
     :   T extends ObjectType
     ?   T['optional'] extends true
