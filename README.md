@@ -17,7 +17,8 @@ This module works in __ESM__ projects (using _import_) and __CJS__ (using _requi
 	* [Type `'date'`](#Typedate)
 	* [Type `'array'`](#Typearray)
 	* [Type `'object'`](#Typeobject)
-	* [Type `record`](#Typerecord)
+	* [Type `'record'`](#Typerecord)
+	* [Type `'enum'`](#Typeenum)
 * [Utilities](#Utilities)
 	* [`this.structure`](#this.structure)
 
@@ -348,7 +349,7 @@ export const auditor = new Auditor({
 });
 ```
 
-### <a name='Typerecord'></a>Type `record`
+### <a name='Typerecord'></a>Type `'record'`
 Options:
 - `items` _(required)_: `BaseType<T>`;
     > With this option you can specify the structure of every item stored for each key inside of the object, using the same options described in the past types described. __You can declare nested arrays, object arrays, or nested dictionaries too.__
@@ -376,6 +377,66 @@ Options:
     ```
 
 
+### <a name='Typeenum'></a>Type `'enum'`
+The `'enum'` type allows for the validation of values against a predefined set of allowed values. This set can include primitives (such as strings and numbers), arrays, objects, or even dates, providing flexibility for different validation scenarios. The `'enum'` type ensures the value being validated exactly matches one of the values in the specified set.
+
+Options:
+-   `values` _(required)_: `Array<any>`;
+    >   An array containing the valid values for the enum. The values can be of any type, allowing for the validation of complex structures and data types.
+
+-   `optional` _(optional)_: `boolean`;
+    >   By default, this value is `false`. When set to `true`, and the incoming value is `null` or `undefined` (and those values are not explicitly included in the `values` array), the `Auditor` instance will return `undefined`. This behavior allows fields to be omitted without causing validation errors. If `optional` is set to `false` and the incoming value is either `null`, `undefined`, or not included in the `values` array, the `Auditor` instance will throw an error, enforcing strict presence and value validation.
+
+Example with primitive values:
+```ts
+import { Auditor } from 'audit-var';
+
+export const auditor = new Auditor({
+    type: 'enum',
+    values: ['active', 'inactive', 'pending'] as const,
+    optional: true
+});
+```
+
+Example with objects:
+```ts
+import { Auditor } from 'audit-var';
+
+export const auditor = new Auditor({
+    type: 'enum',
+    values: [
+        { status: 'active', code: 1 },
+        { status: 'inactive', code: 2 }
+    ] as const
+});
+```
+
+Example with arrays:
+```ts
+import { Auditor } from 'audit-var';
+
+export const auditor = new Auditor({
+    type: 'enum',
+    values: [
+        [1, 2, 3],
+        ['a', 'b', 'c']
+    ] as const
+});
+```
+
+Example with dates:
+```ts
+import { Auditor } from 'audit-var';
+
+export const auditor = new Auditor({
+    type: 'enum',
+    values: [
+        new Date('2023-01-01T00:00:00.000Z'),
+        new Date('2023-12-31T23:59:59.999Z')
+    ] as const
+});
+```
+
 ## <a name='Utilities'></a>Utilities
 ### <a name='this.structure'></a>`this.structure`
 Gets the actual structure of the current instance. Whith this you attach them to another more complex instance.
@@ -396,5 +457,4 @@ const auditorParent = new Auditor({
         objB: auditor.child.structure,
     }
 });
-
 ```

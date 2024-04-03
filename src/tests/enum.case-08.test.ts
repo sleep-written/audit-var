@@ -23,8 +23,15 @@ test('optional field with a valid value', t => {
 });
 
 // Test para un campo opcional sin valor (undefined)
-test('optional field with no value', t => {
+test('optional field with no value (input = undefined)', t => {
     const target = undefined;
+    const result = auditorOptional.audit(target);
+    t.is(result, undefined);
+});
+
+// Test para un campo opcional sin valor (null)
+test('optional field with no value (input = null)', t => {
+    const target = null;
     const result = auditorOptional.audit(target);
     t.is(result, undefined);
 });

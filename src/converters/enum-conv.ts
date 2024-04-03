@@ -46,7 +46,7 @@ export const enumConv: converterFunct<EnumType> = (d, t, p) => {
         } else if (t != null) {
             throw new ValueNotInEnumError(p, t, d.values);
         } else {
-            return t;
+            return undefined;
         }
     } else {
         return t;
