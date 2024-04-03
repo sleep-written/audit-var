@@ -1,5 +1,5 @@
+import type { converterFunct, RecordType } from '../interfaces/index.js';
 import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
-import { converterFunct, RecordType } from '../interfaces/index.js';
 import { recursiveConv } from './recursive-conv.js';
 
 export const recordConv: converterFunct<RecordType> = (d, t, p) => {

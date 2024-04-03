@@ -1,5 +1,5 @@
+import type { ArrayType, converterFunct } from '../interfaces/index.js';
 import { InvalidTypeError, NotOptionalError, WrongLengthError } from '../errors/index.js';
-import { ArrayType, converterFunct } from '../interfaces/index.js';
 import { recursiveConv } from './recursive-conv.js';
 
 export const arrayConv: converterFunct<ArrayType> = (d, t, p) => {

@@ -1,4 +1,4 @@
-import { BaseType } from './base-type.js';
+import type { BaseType } from './base-type.js';
 
 export interface StringType extends BaseType<'string'> {
     /**

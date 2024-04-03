@@ -1,5 +1,5 @@
-import { Path } from './path.js';
-import { Types } from './types.js';
+import type { Path } from './path.js';
+import type { Types } from './types.js';
 
 export type converterFunct<T extends Types> = (
     definition: T,

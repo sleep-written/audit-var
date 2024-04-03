@@ -1,4 +1,4 @@
-import { Path } from '../interfaces/index.js';
+import type { Path } from '../interfaces/index.js';
 
 export abstract class AuditorError extends Error {
     protected _path: Path;

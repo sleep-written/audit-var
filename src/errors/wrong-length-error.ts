@@ -1,4 +1,4 @@
-import { Path } from '../interfaces/path.js';
+import type { Path } from '../interfaces/path.js';
 import { AuditorError } from './auditor-error.js';
 
 export class WrongLengthError extends AuditorError {

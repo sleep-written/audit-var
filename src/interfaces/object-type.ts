@@ -1,11 +1,11 @@
-import { BaseType } from './base-type.js';
-import { ArrayType } from './array-type.js';
+import type { BaseType } from './base-type.js';
+import type { ArrayType } from './array-type.js';
 
-import { DateType } from './date-type.js';
-import { NumberType } from './number-type.js';
-import { StringType } from './string-type.js';
-import { RecordType } from './record-type.js';
-import { BooleanType } from './boolean-type.js';
+import type { DateType } from './date-type.js';
+import type { NumberType } from './number-type.js';
+import type { StringType } from './string-type.js';
+import type { RecordType } from './record-type.js';
+import type { BooleanType } from './boolean-type.js';
 
 export interface ObjectType extends BaseType<'object'> {
     /**

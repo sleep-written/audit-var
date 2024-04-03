@@ -351,7 +351,7 @@ export const auditor = new Auditor({
 ### <a name='Typerecord'></a>Type `record`
 Options:
 - `items` _(required)_: `BaseType<T>`;
-    > With this option you can specify the structure of every item stored for each key inside of the, using the same options described in the past types described. __You can declare nested arrays, object arrays, or nested dictionaries too.__
+    > With this option you can specify the structure of every item stored for each key inside of the object, using the same options described in the past types described. __You can declare nested arrays, object arrays, or nested dictionaries too.__
 
     ```ts
     import { Auditor } from 'audit-var';

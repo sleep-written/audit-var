@@ -1,7 +1,7 @@
 export { Auditor } from './auditor.js';
 export * from './errors/index.js'
 
-export {
+export type {
     Types,
     ResponseType,
 

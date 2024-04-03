@@ -1,9 +1,9 @@
-import { BaseType } from './base-type.js';
-import { NumberType } from './number-type.js';
-import { StringType } from './string-type.js';
-import { ObjectType } from './object-type.js';
-import { RecordType } from './record-type.js';
-import { BooleanType } from './boolean-type.js';
+import type { BaseType } from './base-type.js';
+import type { NumberType } from './number-type.js';
+import type { StringType } from './string-type.js';
+import type { ObjectType } from './object-type.js';
+import type { RecordType } from './record-type.js';
+import type { BooleanType } from './boolean-type.js';
 
 export interface ArrayType extends BaseType<'array'> {
     /**

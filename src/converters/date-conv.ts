@@ -1,5 +1,5 @@
+import type { converterFunct, DateType } from '../interfaces/index.js';
 import { InvalidJSONDateError, InvalidTypeError, NotOptionalError } from '../errors/index.js';
-import { converterFunct, DateType } from '../interfaces/index.js';
 
 export const dateConv: converterFunct<DateType> = (d, t, p) => {
     if (t == null) {

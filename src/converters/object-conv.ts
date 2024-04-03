@@ -1,4 +1,4 @@
-import { ObjectType, converterFunct } from '../interfaces/index.js';
+import type { ObjectType, converterFunct } from '../interfaces/index.js';
 import { NotOptionalError } from '../errors/index.js';
 import { recursiveConv } from './recursive-conv.js';
 

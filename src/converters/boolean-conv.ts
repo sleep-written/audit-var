@@ -1,5 +1,5 @@
+import type { converterFunct, BooleanType } from '../interfaces/index.js';
 import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
-import { converterFunct, BooleanType } from '../interfaces/index.js';
 
 export const booleanConv: converterFunct<BooleanType> = (d, t, p) => {
     if (t == null) {

@@ -1,4 +1,4 @@
-import { converterFunct, Types } from '../interfaces/index.js';
+import type { converterFunct, Types } from '../interfaces/index.js';
 import { booleanConv } from './boolean-conv.js';
 import { numberConv } from './number-conv.js';
 import { objectConv } from './object-conv.js';

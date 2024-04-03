@@ -1,13 +1,6 @@
 {
-    "compilerOptions": {
-        "composite": true,
-        "noEmit": true
-    },
-    "references": [
-        { "path": "./tsconfig.cjs.json" },
-        { "path": "./tsconfig.json" }
-    ],
+    "extends": "./tsconfig.json",
     "exclude": [
-        "./dist/"
+        "./src/**/*.test.ts"
     ]
 }

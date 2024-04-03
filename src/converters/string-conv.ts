@@ -1,5 +1,5 @@
+import type { StringType, converterFunct } from '../interfaces/index.js';
 import { InvalidTypeError, NotOptionalError, WrongLengthError } from '../errors/index.js';
-import { StringType, converterFunct } from '../interfaces/index.js';
 
 export const stringConv: converterFunct<StringType> = (d, t, p) => {
     if (t == null) {

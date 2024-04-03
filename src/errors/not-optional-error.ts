@@ -1,4 +1,4 @@
-import { Path } from '../interfaces/index.js';
+import type { Path } from '../interfaces/index.js';
 import { AuditorError } from './auditor-error.js';
 
 export class NotOptionalError extends AuditorError {
