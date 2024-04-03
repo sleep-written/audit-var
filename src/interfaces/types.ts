@@ -5,12 +5,14 @@ import type { NumberType } from './number-type.js';
 import type { StringType } from './string-type.js';
 import type { RecordType } from './record-type.js';
 import type { BooleanType } from './boolean-type.js';
+import type { EnumType } from './enum-type.js';
 
 export type Types = 
-    DateType |
-    ArrayType |
-    RecordType |
-    ObjectType |
-    NumberType |
-    StringType |
-    BooleanType;
+    DateType        |
+    ArrayType       |
+    RecordType      |
+    ObjectType      |
+    NumberType      |
+    StringType      |
+    BooleanType     |
+    EnumType;

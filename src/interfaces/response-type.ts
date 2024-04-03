@@ -1,4 +1,5 @@
 import type { Types } from './types.js';
+import type { ItemOfArray } from './item-of-array.js';
 
 import type { NumberType } from './number-type.js';
 import type { BooleanType } from './boolean-type.js';
@@ -8,6 +9,7 @@ import type { ArrayType } from './array-type.js';
 import type { StringType } from './string-type.js';
 import type { ObjectType } from './object-type.js';
 import type { RecordType } from './record-type.js';
+import type { EnumType } from './enum-type.js';
 
 export type ResponseType<T extends Types> =
         T extends DateType
@@ -29,6 +31,11 @@ export type ResponseType<T extends Types> =
     ?   T['optional'] extends true
     ?   boolean | undefined
     :   boolean
+
+    :   T extends EnumType
+    ?   T['optional'] extends true
+    ?   ItemOfArray<T['values']> | undefined
+    :   ItemOfArray<T['values']>
 
     :   T extends ArrayType
     ?   T['optional'] extends true

@@ -6,6 +6,7 @@ import type { NumberType } from './number-type.js';
 import type { StringType } from './string-type.js';
 import type { RecordType } from './record-type.js';
 import type { BooleanType } from './boolean-type.js';
+import type { EnumType } from './enum-type.js';
 
 export interface ObjectType extends BaseType<'object'> {
     /**
@@ -19,6 +20,7 @@ export interface ObjectType extends BaseType<'object'> {
         DateType    |
         NumberType  |
         StringType  |
-        BooleanType
+        BooleanType |
+        EnumType
     >;
 }

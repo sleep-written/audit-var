@@ -6,6 +6,7 @@ import { stringConv } from './string-conv.js';
 import { recordConv } from './record-conv.js';
 import { arrayConv } from './array-conv.js';
 import { dateConv } from './date-conv.js';
+import { enumConv } from './enum-conv.js';
 
 export const recursiveConv: converterFunct<Types> = (d, t, p) => {
     switch (d.type) {
@@ -20,6 +21,9 @@ export const recursiveConv: converterFunct<Types> = (d, t, p) => {
 
         case 'boolean':
             return booleanConv(d, t, p);
+
+        case 'enum':
+            return enumConv(d, t, p);
 
         case 'array':
             return arrayConv(d, t, p);

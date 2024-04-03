@@ -4,6 +4,7 @@ export type { ResponseType } from './response-type.js';
 export type { converterFunct } from './converter-funct.js';
 
 export type { BaseType } from './base-type.js';
+export type { EnumType } from './enum-type.js';
 export type { ArrayType } from './array-type.js';
 export type { ObjectType } from './object-type.js';
 export type { RecordType } from './record-type.js';

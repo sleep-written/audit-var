@@ -4,6 +4,7 @@ import type { StringType } from './string-type.js';
 import type { ObjectType } from './object-type.js';
 import type { RecordType } from './record-type.js';
 import type { BooleanType } from './boolean-type.js';
+import type { EnumType } from './enum-type.js';
 
 export interface ArrayType extends BaseType<'array'> {
     /**
@@ -32,5 +33,6 @@ export interface ArrayType extends BaseType<'array'> {
         StringType  |
         ObjectType  |
         RecordType  |
-        BooleanType;
+        BooleanType |
+        EnumType;
 }
