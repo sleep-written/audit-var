@@ -1,6 +1,6 @@
 {
     "name": "audit-var",
-    "version": "2.2.1",
+    "version": "2.3.0",
     "type": "module",
     "description": "Inspects variables according to a defined structure",
     "main": "./dist/index.js",
@@ -16,8 +16,8 @@
     "scripts": {
         "test": "ava",
         "build": "tsc --build ./tsconfig.build.json",
-        "clean": "tsc --build ./tsconfig.build.json --clean",
-        "prepare": "npm run build"
+        "clean": "rm -rf ./dist",
+        "prepare": "npm run clean && npm run build"
     },
     "repository": {
         "type": "git",
