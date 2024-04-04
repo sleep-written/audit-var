@@ -2,7 +2,7 @@
 
 Validates the type and structure of an incoming object. It's specially useful to validate the incoming data in endpoints of an API Rest, or in any other escenario when it's possible to receive an unexpected potentially manipulated data from the requester.
 
-This module works in __ESM__ projects (using _import_) and __CJS__ (using _require_) projects too.
+This library now is an __ESM__, so if you need __CJS__ support, then use [this version](https://www.npmjs.com/package/audit-var/v/2.2.1) instead.
 
 ## <a name='Contents'></a>Contents
 
