@@ -1,6 +1,6 @@
 {
     "name": "audit-var",
-    "version": "2.3.0",
+    "version": "2.3.1",
     "type": "module",
     "description": "Inspects variables according to a defined structure",
     "main": "./dist/index.js",
