@@ -1,32 +1,34 @@
-import test from 'ava';
-import { Auditor } from '../auditor.js';
+import { strictEqual, throws } from 'node:assert';
+import { describe, it } from 'node:test';
+
 import { ValueNotInEnumError } from '../errors/index.js';
+import { Auditor } from '../auditor.js';
 
 const auditor = new Auditor({
     type: 'enum',
     values: [ 'foo', 'bar' ] as const
 });
 
-test('target = "foo", target is "foo" | "bar"', t => {
-    const target = 'foo';
-    const result = auditor.audit(target);
-    t.is(result, 'foo');
-});
+describe('enum.case-01', () => {
+    it('target = "foo", target is "foo" | "bar"', () => {
+        const target = 'foo';
+        const result = auditor.audit(target);
+        strictEqual(result, 'foo');
+    });
 
-test('target = "bar", target is "foo" | "bar"', t => {
-    const target = 'bar';
-    const result = auditor.audit(target);
-    t.is(result, 'bar');
-});
+    it('target = "bar", target is "foo" | "bar"', () => {
+        const target = 'bar';
+        const result = auditor.audit(target);
+        strictEqual(result, 'bar');
+    });
 
-test('target = "baz", target is not "foo" | "bar"', t => {
-    t.throws(
-        () => {
-            const target = 'baz';
-            auditor.audit(target);
-        },
-        {
-            instanceOf: ValueNotInEnumError
-        }
-    );
+    it('target = "baz", target is not "foo" | "bar"', () => {
+        throws(
+            () => {
+                const target = 'baz';
+                auditor.audit(target);
+            },
+            ValueNotInEnumError
+        );
+    });
 });

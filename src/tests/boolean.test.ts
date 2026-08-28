@@ -1,46 +1,49 @@
-import test from 'ava';
+import { strictEqual, throws, ok } from 'node:assert';
+import { describe, it } from 'node:test';
 
-import { Auditor } from '../auditor.js';
 import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
+import { Auditor } from '../auditor.js';
 
-test('optional = false; value = true', t => {
-    const aud = new Auditor({ type: 'boolean' });
-    const val = aud.audit(true);
-    t.true(val);
-});
+describe('boolean', () => {
+    it('optional = false; value = true', () => {
+        const aud = new Auditor({ type: 'boolean' });
+        const val = aud.audit(true);
+        strictEqual(val, true);
+    });
 
-test('optional = false; value = undefined', t => {
-    const aud = new Auditor({ type: 'boolean' });
-    t.throws(
-        () => { aud.audit(undefined); },
-        { instanceOf: NotOptionalError }
-    );
-});
+    it('optional = false; value = undefined', () => {
+        const aud = new Auditor({ type: 'boolean' });
+        throws(
+            () => { aud.audit(undefined); },
+            NotOptionalError
+        );
+    });
 
-test('optional = false; value = 666', t => {
-    const aud = new Auditor({ type: 'boolean' });
-    t.throws(
-        () => { aud.audit(666); },
-        { instanceOf: InvalidTypeError }
-    );
-});
+    it('optional = false; value = 666', () => {
+        const aud = new Auditor({ type: 'boolean' });
+        throws(
+            () => { aud.audit(666); },
+            InvalidTypeError
+        );
+    });
 
-test('optional = true; value = true', t => {
-    const aud = new Auditor({ type: 'boolean', optional: true });
-    const val = aud.audit(true);
-    t.true(val);
-});
+    it('optional = true; value = true', () => {
+        const aud = new Auditor({ type: 'boolean', optional: true });
+        const val = aud.audit(true);
+        strictEqual(val, true);
+    });
 
-test('optional = true; value = undefined', t => {
-    const aud = new Auditor({ type: 'boolean', optional: true });
-    const val = aud.audit(undefined);
-    t.assert(val == null);
-});
+    it('optional = true; value = undefined', () => {
+        const aud = new Auditor({ type: 'boolean', optional: true });
+        const val = aud.audit(undefined);
+        ok(val == null);
+    });
 
-test('optional = true; value = 666', t => {
-    const aud = new Auditor({ type: 'boolean', optional: true });
-    t.throws(
-        () => { aud.audit(666); },
-        { instanceOf: InvalidTypeError }
-    );
+    it('optional = true; value = 666', () => {
+        const aud = new Auditor({ type: 'boolean', optional: true });
+        throws(
+            () => { aud.audit(666); },
+            InvalidTypeError
+        );
+    });
 });

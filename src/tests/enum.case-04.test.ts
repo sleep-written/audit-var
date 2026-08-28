@@ -1,6 +1,8 @@
-import test from 'ava';
-import { Auditor } from '../auditor.js';
+import { deepStrictEqual, throws } from 'node:assert';
+import { describe, it } from 'node:test';
+
 import { ValueNotInEnumError } from '../errors/index.js';
+import { Auditor } from '../auditor.js';
 
 const auditor = new Auditor({
     type: 'enum',
@@ -11,44 +13,42 @@ const auditor = new Auditor({
     ] as const
 });
 
-test('target = [1, 2, 3], target matches one of the enum arrays', t => {
-    const target = [1, 2, 3];
-    const result = auditor.audit(target);
-    t.deepEqual(result, [1, 2, 3]);
-});
+describe('enum.case-04', () => {
+    it('target = [1, 2, 3], target matches one of the enum arrays', () => {
+        const target = [1, 2, 3];
+        const result = auditor.audit(target);
+        deepStrictEqual(result, [1, 2, 3]);
+    });
 
-test('target = ["a", "b", "c"], target matches one of the enum arrays', t => {
-    const target = ['a', 'b', 'c'];
-    const result = auditor.audit(target);
-    t.deepEqual(result, ['a', 'b', 'c']);
-});
+    it('target = ["a", "b", "c"], target matches one of the enum arrays', () => {
+        const target = ['a', 'b', 'c'];
+        const result = auditor.audit(target);
+        deepStrictEqual(result, ['a', 'b', 'c']);
+    });
 
-test('target = [true, false, true], target matches one of the enum arrays', t => {
-    const target = [true, false, true];
-    const result = auditor.audit(target);
-    t.deepEqual(result, [true, false, true]);
-});
+    it('target = [true, false, true], target matches one of the enum arrays', () => {
+        const target = [true, false, true];
+        const result = auditor.audit(target);
+        deepStrictEqual(result, [true, false, true]);
+    });
 
-test('target = [1, 2], target does not match any of the enum arrays', t => {
-    t.throws(
-        () => {
-            const target = [1, 2];
-            auditor.audit(target);
-        },
-        {
-            instanceOf: ValueNotInEnumError
-        }
-    );
-});
+    it('target = [1, 2], target does not match any of the enum arrays', () => {
+        throws(
+            () => {
+                const target = [1, 2];
+                auditor.audit(target);
+            },
+            ValueNotInEnumError
+        );
+    });
 
-test('target = ["a", "b"], target does not match any of the enum arrays', t => {
-    t.throws(
-        () => {
-            const target = ['a', 'b'];
-            auditor.audit(target);
-        },
-        {
-            instanceOf: ValueNotInEnumError
-        }
-    );
+    it('target = ["a", "b"], target does not match any of the enum arrays', () => {
+        throws(
+            () => {
+                const target = ['a', 'b'];
+                auditor.audit(target);
+            },
+            ValueNotInEnumError
+        );
+    });
 });

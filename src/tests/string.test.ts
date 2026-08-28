@@ -1,64 +1,63 @@
-import test from 'ava';
+import { strictEqual, throws, ok } from 'node:assert';
+import { describe, it } from 'node:test';
 
-import { Auditor } from '../auditor.js';
 import { InvalidTypeError, NotOptionalError } from '../errors/index.js';
+import { Auditor } from '../auditor.js';
 
-test('optional = false; value = "jajaja"', t => {
-    const aud = new Auditor({ type: 'string' });
-    const val = aud.audit('jajaja');
-    t.is(val, 'jajaja');
-});
+describe('string', () => {
+    it('optional = false; value = "jajaja"', () => {
+        const aud = new Auditor({ type: 'string' });
+        const val = aud.audit('jajaja');
+        strictEqual(val, 'jajaja');
+    });
 
-test('optional = false; value = "jajajajajajaj" (max: 3)', t => {
-    const aud = new Auditor({ type: 'string', max: 3 });
-    t.throws(
-        () => {
-            aud.audit('jajajajajajaj');
-        },
-        {
-            message: 'The length of the string is higher than 3.'
-        }
-    );
-});
+    it('optional = false; value = "jajajajajajaj" (max: 3)', () => {
+        const aud = new Auditor({ type: 'string', max: 3 });
+        throws(
+            () => { aud.audit('jajajajajajaj'); },
+            { message: 'The length of the string is higher than 3.' }
+        );
+    });
 
-test('optional = false; value = "jajajajajajaj" (max: 3, cut: true)', t => {
-    const aud = new Auditor({ type: 'string', max: 3, cut: true });
-    const val = aud.audit('jajajajajajaj');
-    t.is(val, 'jaj');
-});
+    it('optional = false; value = "jajajajajajaj" (max: 3, cut: true)', () => {
+        const aud = new Auditor({ type: 'string', max: 3, cut: true });
+        const val = aud.audit('jajajajajajaj');
+        strictEqual(val, 'jaj');
+    });
 
-test('optional = false; value = undefined', t => {
-    const aud = new Auditor({ type: 'string' });
-    t.throws(
-        () => { aud.audit(undefined); },
-        { instanceOf: NotOptionalError }
-    );
-});
+    it('optional = false; value = undefined', () => {
+        const aud = new Auditor({ type: 'string' });
+        throws(
+            () => { aud.audit(undefined); },
+            NotOptionalError
+        );
+    });
 
-test('optional = false; value = 555', t => {
-    const aud = new Auditor({ type: 'string' });
-    t.throws(
-        () => { aud.audit(555); },
-        { instanceOf: InvalidTypeError }
-    );
-});
+    it('optional = false; value = 555', () => {
+        const aud = new Auditor({ type: 'string' });
+        throws(
+            () => { aud.audit(555); },
+            InvalidTypeError
+        );
+    });
 
-test('optional = true; value = "jajaja"', t => {
-    const aud = new Auditor({ type: 'string', optional: true });
-    const val = aud.audit('jajaja');
-    t.is(val, 'jajaja');
-});
+    it('optional = true; value = "jajaja"', () => {
+        const aud = new Auditor({ type: 'string', optional: true });
+        const val = aud.audit('jajaja');
+        strictEqual(val, 'jajaja');
+    });
 
-test('optional = true; value = undefined"', t => {
-    const aud = new Auditor({ type: 'string', optional: true });
-    const val = aud.audit(undefined);
-    t.assert(val == null);
-});
+    it('optional = true; value = undefined', () => {
+        const aud = new Auditor({ type: 'string', optional: true });
+        const val = aud.audit(undefined);
+        ok(val == null);
+    });
 
-test('optional = true; value = 555', t => {
-    const aud = new Auditor({ type: 'string', optional: true });
-    t.throws(
-        () => { aud.audit(555); },
-        { instanceOf: InvalidTypeError }
-    );
+    it('optional = true; value = 555', () => {
+        const aud = new Auditor({ type: 'string', optional: true });
+        throws(
+            () => { aud.audit(555); },
+            InvalidTypeError
+        );
+    });
 });

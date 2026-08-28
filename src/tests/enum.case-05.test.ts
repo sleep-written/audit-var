@@ -1,6 +1,8 @@
-import test from 'ava';
-import { Auditor } from '../auditor.js';
+import { deepStrictEqual, throws } from 'node:assert';
+import { describe, it } from 'node:test';
+
 import { ValueNotInEnumError } from '../errors/index.js';
+import { Auditor } from '../auditor.js';
 
 const auditor = new Auditor({
     type: 'enum',
@@ -11,32 +13,30 @@ const auditor = new Auditor({
     ] as const
 });
 
-test('target matches one of the enum objects with nested properties', t => {
-    const target = { id: 2, details: { name: 'Item 2', tags: ['c', 'd'] } };
-    const result = auditor.audit(target);
-    t.deepEqual(result, { id: 2, details: { name: 'Item 2', tags: ['c', 'd'] } });
-});
+describe('enum.case-05', () => {
+    it('target matches one of the enum objects with nested properties', () => {
+        const target = { id: 2, details: { name: 'Item 2', tags: ['c', 'd'] } };
+        const result = auditor.audit(target);
+        deepStrictEqual(result, { id: 2, details: { name: 'Item 2', tags: ['c', 'd'] } });
+    });
 
-test('target does not match any of the enum objects due to different root property', t => {
-    t.throws(
-        () => {
-            const target = { id: 4, details: { name: 'Item 4', tags: ['g', 'h'] } };
-            auditor.audit(target);
-        },
-        {
-            instanceOf: ValueNotInEnumError
-        }
-    );
-});
+    it('target does not match any of the enum objects due to different root property', () => {
+        throws(
+            () => {
+                const target = { id: 4, details: { name: 'Item 4', tags: ['g', 'h'] } };
+                auditor.audit(target);
+            },
+            ValueNotInEnumError
+        );
+    });
 
-test('target does not match any of the enum objects due to different nested property', t => {
-    t.throws(
-        () => {
-            const target = { id: 1, details: { name: 'Item 1', tags: ['a', 'c'] } }; // Note the 'c' instead of 'b'
-            auditor.audit(target);
-        },
-        {
-            instanceOf: ValueNotInEnumError
-        }
-    );
+    it('target does not match any of the enum objects due to different nested property', () => {
+        throws(
+            () => {
+                const target = { id: 1, details: { name: 'Item 1', tags: ['a', 'c'] } }; // Note the 'c' instead of 'b'
+                auditor.audit(target);
+            },
+            ValueNotInEnumError
+        );
+    });
 });
