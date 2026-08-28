@@ -80,3 +80,41 @@ describe('array', () => {
         );
     });
 });
+
+describe('array of dates', () => {
+    it('items = { type: "date" }; value = [Date, Date]', () => {
+        const aud = new Auditor({
+            type: 'array',
+            items: { type: 'date' }
+        });
+
+        const a = new Date('2022-12-31T03:00:00.000Z');
+        const b = new Date('2023-01-01T03:00:00.000Z');
+        deepStrictEqual(aud.audit([a, b]), [a, b]);
+    });
+
+    it('items = { type: "date", fromJSON: true }; value = [string, string]', () => {
+        const aud = new Auditor({
+            type: 'array',
+            items: { type: 'date', fromJSON: true }
+        });
+
+        const arr = aud.audit(['2022-12-31T03:00:00.000Z', '2023-01-01T03:00:00.000Z']);
+        deepStrictEqual(arr, [
+            new Date('2022-12-31T03:00:00.000Z'),
+            new Date('2023-01-01T03:00:00.000Z')
+        ]);
+    });
+
+    it('items = { type: "date" }; value = [Date, "x"]', () => {
+        const aud = new Auditor({
+            type: 'array',
+            items: { type: 'date' }
+        });
+
+        throws(
+            () => { aud.audit([new Date(), 'x']); },
+            InvalidTypeError
+        );
+    });
+});

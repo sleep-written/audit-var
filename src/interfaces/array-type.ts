@@ -1,10 +1,5 @@
 import type { BaseType } from './base-type.js';
-import type { NumberType } from './number-type.js';
-import type { StringType } from './string-type.js';
-import type { ObjectType } from './object-type.js';
-import type { RecordType } from './record-type.js';
-import type { BooleanType } from './boolean-type.js';
-import type { EnumType } from './enum-type.js';
+import type { Types } from './types.js';
 
 export interface ArrayType extends BaseType<'array'> {
     /**
@@ -27,12 +22,5 @@ export interface ArrayType extends BaseType<'array'> {
      * in the past types described. __You can declare nested arrays,
      * or object arrays too.__
      */
-    items:
-        ArrayType   |
-        NumberType  |
-        StringType  |
-        ObjectType  |
-        RecordType  |
-        BooleanType |
-        EnumType;
+    items: Types;
 }
