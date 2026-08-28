@@ -14,9 +14,11 @@
         "dist"
     ],
     "scripts": {
-        "test": "ava",
-        "build": "tsc --build ./tsconfig.build.json",
+        "test": "node --import @bleed-believer/cli --test --",
+        "build:mts": "bleed build --config ./tsconfig.build.json",
+        "build:dts": "tsc --build ./tsconfig.build.json",
         "clean": "rm -rf ./dist",
+        "build": "node --run clean && node --run build:mts && node --run build:dts",
         "prepare": "npm run clean && npm run build"
     },
     "repository": {
@@ -38,9 +40,8 @@
     },
     "homepage": "https://github.com/sleep-written/audit-var#readme",
     "devDependencies": {
-        "@bleed-believer/path-alias": "^1.1.2",
-        "@types/node": "^20.12.3",
-        "ava": "^6.1.2",
-        "typescript": "^5.4.3"
+        "@bleed-believer/cli": "^1.1.0",
+        "@types/node": "^26.4.0",
+        "typescript": "^7.0.2"
     }
 }

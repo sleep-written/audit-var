@@ -2,7 +2,8 @@
     "extends": "./tsconfig.json",
     "compilerOptions": {
         "sourceMap": false,
-        "declaration": true
+        "declaration": true,
+        "emitDeclarationOnly": true
     },
     "exclude": [
         "./src/**/*.test.ts",
