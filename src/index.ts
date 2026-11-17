@@ -1,5 +1,5 @@
 export { Auditor } from './auditor.js';
-export * from './errors/index.js'
+export * from './errors/index.js';
 
 export type {
     Types,
@@ -13,4 +13,4 @@ export type {
     NumberType,
     StringType,
     BooleanType,
-} from './interfaces/index.js'
+} from './interfaces/index.js';
